@@ -1,0 +1,118 @@
+/* Chart styles using Tailwind theme variables */
+/* All styling uses theme variables defined in _variables.css */
+@import "./chart/_utilization-grid.css";
+
+.chart-bar {
+  @apply flex-1 transition-all duration-200 relative opacity-90 rounded-t-md z-10 border border-gray-900/70;
+  background-color: var(--card);
+  box-shadow: 0 0 8px rgba(var(--chart-2), 0.4);
+}
+
+/* Utilization-based colors */
+.chart-bar.high-utilization {
+  @apply border border-destructive;
+  box-shadow: 0 0 8px rgba(var(--destructive), 0.4);
+}
+
+.chart-bar.medium-utilization {
+  @apply border border-chart-4;
+  box-shadow: 0 0 8px rgba(var(--chart-4), 0.4);
+}
+
+.chart-bar.low-utilization {
+  @apply border border-chart-2;
+  box-shadow: 0 0 8px rgba(var(--chart-2), 0.4);
+}
+
+.chart-bar:hover .chart-tooltip {
+  @apply opacity-100;
+  transform: translateY(-2px) translateX(-50%);
+}
+
+.chart-tooltip {
+  @apply absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 text-xs rounded-md p-2.5
+         opacity-0 pointer-events-none z-30 w-40 text-foreground;
+  background: var(--chart-tooltip-bg);
+  border: 1px solid var(--chart-tooltip-border);
+  box-shadow: var(--chart-tooltip-shadow);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.chart-tooltip-date {
+  @apply font-semibold text-center mb-1 text-chart-1;
+  letter-spacing: 0.5px;
+}
+
+.chart-tooltip-label {
+  @apply text-muted-foreground font-normal;
+}
+
+.chart-tooltip-value-blue {
+  @apply text-right font-medium text-chart-1;
+}
+
+.chart-tooltip-value-green {
+  @apply text-right font-medium text-chart-2;
+}
+
+.chart-tooltip-value-red {
+  @apply text-right font-medium text-destructive;
+}
+
+.chart-tooltip-value-yellow {
+  @apply text-right font-medium text-chart-4;
+}
+
+.chart-tooltip-arrow {
+  @apply absolute w-2 h-2 transform rotate-45 left-1/2 -ml-1 -bottom-1;
+  background: var(--chart-tooltip-bg);
+  border-right: 1px solid var(--chart-tooltip-border);
+  border-bottom: 1px solid var(--chart-tooltip-border);
+}
+
+/* Recharts specific styling */
+.recharts-wrapper {
+  font-family: inherit;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--chart-grid);
+  stroke-dasharray: 3 3;
+}
+
+.recharts-xAxis .recharts-cartesian-axis-tick-value,
+.recharts-yAxis .recharts-cartesian-axis-tick-value {
+  fill: var(--chart-text);
+  font-size: 12px;
+}
+
+.recharts-tooltip-wrapper {
+  z-index: 1000;
+}
+
+/* Custom stacked bar chart styling */
+.recharts-bar-rectangle {
+  transition: opacity 0.3s ease;
+}
+
+.recharts-bar-rectangle:hover {
+  opacity: 0.8;
+}
+
+/* Gradient bars for stacked chart */
+.gpu_a100-bar {
+  fill: url(#gpu_a100Gradient);
+}
+
+.gpu_h100-bar {
+  fill: url(#gpu_h100Gradient);
+}
+
+.tpu_v4-bar {
+  fill: url(#tpu_v4Gradient);
+}
+
+.cpu_epyc-bar {
+  fill: url(#cpu_epycGradient);
+}
